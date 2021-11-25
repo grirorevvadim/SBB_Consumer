@@ -15,10 +15,6 @@ public class MyListener {
 //        System.out.println("Message from the queue: " + string);
 //    }
 
-    @RabbitListener(queues = "helloPojo")
-    public void listenUser(User user) {
-        System.out.println("Message from the queue: " + user.getId() + " " + user.getLogin() + " " + user.getEmail());
-    }
 
     @RabbitListener(queues = "schedules")
     public void listenUser(List<BoardDTO> boards) {

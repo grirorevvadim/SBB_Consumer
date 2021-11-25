@@ -12,7 +12,7 @@
 <body>
 <div class="border" th:if="${board.size()} > 0">
     <p>Schedule for:
-        <span th:text="${board.get(0).station.stationName}"></span>
+        <span th:text="${board.get(0).station}"></span>
     </p>
     <table class="table">
         <thead>
@@ -23,13 +23,13 @@
         </thead>
         <tbody>
         <tr th:each="b: ${board}">
-            <td th:text="${b.train.getTrainNumber()}"></td>
+            <td th:text="${b.trainNumber}"></td>
             <td th:text="${b.getArrivalDateTime()}"></td>
         </tr>
         </tbody>
     </table>
-    <a th:href="@{'/'}"
-       class="btn btn-primary mt-5">Back to start page</a>
+    <a th:href="@{'/home'}"
+       class="btn btn-primary mt-5">Back to home page</a>
 </div>
 </body>
 </html>

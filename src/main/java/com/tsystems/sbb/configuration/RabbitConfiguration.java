@@ -34,8 +34,13 @@ public class RabbitConfiguration implements RabbitListenerConfigurer {
     }
 
     @Bean
-    public Queue myQueue() {
-        return new Queue("helloPojo");
+    public Queue schedules() {
+        return new Queue("schedules");
+    }
+
+    @Bean
+    public Queue notification() {
+        return new Queue("notification");
     }
 
     @Bean

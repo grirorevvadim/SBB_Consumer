@@ -6,7 +6,7 @@ import java.io.Serializable;
 
 @Data
 public class BoardDTO implements Serializable {
-    private TrainDTO train;
+    private String trainNumber;
     private String arrivalDateTime;
-    private StationDTO station;
+    private String station;
 }
