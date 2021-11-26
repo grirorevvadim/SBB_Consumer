@@ -6,30 +6,50 @@
       href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.4/css/fontawesome.min.css"
       integrity="sha384-jLKHWM3JRmfMU0A5x5AkjWkw/EYfGUAGagvnfryNV3F9VqM98XiIH7VBGVoxVSc7" crossorigin="anonymous">
 <head>
+    <link href="/webjars/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/main.css" rel="stylesheet">
+    <script src="/webjars/jquery/jquery.min.js"></script>
+    <script src="/webjars/sockjs-client/sockjs.min.js"></script>
+    <script src="/webjars/stomp-websocket/stomp.min.js"></script>
     <meta charset="UTF-8">
     <title>Board</title>
+
+    <script>
+        var socket = new SockJS('/gs-guide-websocket');
+        stompClient = Stomp.over(socket);
+        stompClient.connect({}, function (frame) {
+            console.log('Connected: ' + frame);
+            stompClient.subscribe('/topic/greetings', function (greeting) {
+                location.reload(true)
+            });
+        });
+    </script>
 </head>
 <body>
-<div class="border" th:if="${board.size()} > 0">
-    <p>Schedule for:
-        <span th:text="${board.get(0).station}"></span>
-    </p>
-    <table class="table">
-        <thead>
-        <tr>
-            <th>Train number</th>
-            <th>Arrival date time</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr th:each="b: ${board}">
-            <td th:text="${b.trainNumber}"></td>
-            <td th:text="${b.getArrivalDateTime()}"></td>
-        </tr>
-        </tbody>
-    </table>
-    <a th:href="@{'/home'}"
-       class="btn btn-primary mt-5">Back to home page</a>
+<div id="main-content" class="container">
+    <div class="row">
+        <div class="border" th:if="${board.size()} > 0">
+            <p>Schedule for:
+                <span th:text="${board.get(0).station}"></span>
+            </p>
+            <table id="conversation" class="table">
+                <thead>
+                <tr>
+                    <th>Train number</th>
+                    <th>Arrival date time</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="b: ${board}">
+                    <td th:text="${b.trainNumber}"></td>
+                    <td th:text="${b.getArrivalDateTime()}"></td>
+                </tr>
+                </tbody>
+            </table>
+            <a th:href="@{'/home'}"
+               class="btn btn-primary mt-5">Back to home page</a>
+        </div>
+    </div>
 </div>
 </body>
 </html>
