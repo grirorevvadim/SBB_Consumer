@@ -13,17 +13,6 @@
     <script src="/webjars/stomp-websocket/stomp.min.js"></script>
     <meta charset="UTF-8">
     <title>Board</title>
-
-    <script>
-        var socket = new SockJS('/gs-guide-websocket');
-        stompClient = Stomp.over(socket);
-        stompClient.connect({}, function (frame) {
-            console.log('Connected: ' + frame);
-            stompClient.subscribe('/topic/greetings', function (greeting) {
-                location.reload(true)
-            });
-        });
-    </script>
 </head>
 <body>
 <div id="main-content" class="container">
@@ -51,5 +40,16 @@
         </div>
     </div>
 </div>
+<script>
+    var socket = new SockJS('/gs-guide-websocket');
+    var stompClient = Stomp.over(socket);
+    stompClient.connect({}, function (frame) {
+        console.log('Connected: ' + frame);
+        stompClient.subscribe('/topic/greetings', function (listenNotification) {
+            document.location.reload(true)
+            console.log('Message is received ' + listenNotification);
+        });
+    })</script>
+
 </body>
 </html>

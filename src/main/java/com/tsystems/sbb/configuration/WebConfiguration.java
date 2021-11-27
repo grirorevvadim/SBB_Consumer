@@ -19,7 +19,6 @@ public class WebConfiguration extends AbstractAnnotationConfigDispatcherServletI
 
         var servletAppContext = new AnnotationConfigWebApplicationContext();
         servletAppContext.register(MvcConfiguration.class);
-//        servletAppContext.register(RabbitConfiguration.class); // is it needed?
 
         var dispatcherServlet = new DispatcherServlet(servletAppContext);
 

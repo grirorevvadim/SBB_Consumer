@@ -14,20 +14,18 @@
     <form action="#" th:action="@{/board}" th:object="${station}" method="get">
 
         <div class="form-group col-md-6">
-            <label for="StationName" class="col-form-label">StationName</label>
+            <label for="StationName" class="col-form-label">Station name</label>
             <input type="text" th:field="*{stationName}" class="form-control" id="stationName"
-                   placeholder="stationName">
+                   placeholder="Station name">
             <span th:if="${#fields.hasErrors('stationName')}" th:errors="*{stationName}" class="text-danger"></span>
         </div>
 
         <div class="row">
             <div class="mt-5 ml-4">
-                <input type="submit" class="btn btn-primary" value="Get a board for the station">
+                <input type="submit" class="btn btn-primary mt-5" value="Show time table">
             </div>
         </div>
     </form>
-    <a th:href="@{'/home'}"
-       class="btn btn-primary mt-5">Back to home page</a>
 </div>
 </body>
 </html>
